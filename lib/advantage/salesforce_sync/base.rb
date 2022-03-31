@@ -6,10 +6,6 @@ module Advantage
 
       def initialize(client:)
         @client = client.connection
-        # relationships = [
-        #   { contact: :Contact__c },
-        #   { opportunity: :Opportunity__c }
-        # ]
       end
 
       def table_name
@@ -54,9 +50,25 @@ module Advantage
       end
 
       # TODO: pass some mapping that cleans the data object.. i.e. 'Id' => :id
-      # def transform(mappings)
-      #   binding.pry
+      def transform
+        mappings = MAPPINGS
+
+        mappings.each_with_object({}) do |(k,v), hsh|
+          hsh[k] =>
+          rel[key]
+        end
+      # mapped_data = mappings.transform_values do |etl|
+      #   if etl.is_a?(Hash)
+      #     key = mappings.key(etl)
+      #     etl.transform_values do |etl_rel|
+      #       attributes[key][etl_rel]
+      #     end
+      #   else
+      #     attributes[etl]
+      #   end
       # end
+
+      end
     end
 
     private

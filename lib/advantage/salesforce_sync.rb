@@ -8,6 +8,7 @@ require 'active_support/all'
 
 
 require_relative "salesforce_sync/opportunity_contact"
+require_relative "salesforce_sync/opportunity_team_member"
 
 module Advantage
   module SalesforceSync

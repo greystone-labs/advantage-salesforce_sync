@@ -42,33 +42,24 @@ module Advantage
         rels.each_with_object({}) do |(k,v), hsh| 
           hsh[k] = client.find(k.to_s.capitalize, result[v]).attrs
         end
-
-        # 3.1.0 :019 > res['Contact__c']
+        # > res['Contact__c']
         #  => "00379000006kaVAAAY" 
-        # 3.1.0 :020 > res['Opportunity__c']
+        # res['Opportunity__c']
         #  => "00679000005hw1QAAQ" 
       end
 
       # TODO: pass some mapping that cleans the data object.. i.e. 'Id' => :id
-      def transform
+      def transform(relationship)
         mappings = MAPPINGS
-
+        # mappings = {:user=>{"Id"=>:id}}
+        # relationship = {:user=>{"Id"=>"00579000000quzoAAA", "Username"=>"john.someone@mailinator.com"}}
         mappings.each_with_object({}) do |(k,v), hsh|
-          hsh[k] =>
-          rel[key]
+          hsh[k] = mappings[k].each_with_object({}) do |(kk,vv), nhsh|
+            nhsh[vv] = relationship[k][kk]
+          end
         end
-      # mapped_data = mappings.transform_values do |etl|
-      #   if etl.is_a?(Hash)
-      #     key = mappings.key(etl)
-      #     etl.transform_values do |etl_rel|
-      #       attributes[key][etl_rel]
-      #     end
-      #   else
-      #     attributes[etl]
-      #   end
-      # end
-
       end
+
     end
 
     private

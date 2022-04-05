@@ -3,18 +3,16 @@
 require_relative "salesforce_sync/version"
 require_relative "salesforce_sync/client"
 require_relative "salesforce_sync/base"
-require 'restforce'
-require 'active_support/all'
-
+require "restforce"
+require "active_support/all"
 
 require_relative "salesforce_sync/opportunity_contact"
 require_relative "salesforce_sync/opportunity_team_member"
+require_relative "salesforce_sync/opportunity"
 
 module Advantage
   module SalesforceSync
     class Error < StandardError; end
-
-
   end
 end
 

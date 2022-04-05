@@ -1,9 +1,9 @@
 class OpportunityTeamMember < Advantage::SalesforceSync::Base
-  TABLE_NAME = 'opportunityteammember'
+  TABLE_NAME = "opportunityteammember"
   # table_name: :foreign_key
   RELATIONSHIPS = { user: "UserId", opportunity: "OpportunityId" }
-  MAPPINGS  = { 
-    opportunity: { 'Id': :id}
+  MAPPINGS = {
+    opportunity: { 'Id': :id }
   }
 end
 

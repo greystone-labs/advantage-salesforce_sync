@@ -1,5 +1,5 @@
 class OpportunityContact < Advantage::SalesforceSync::Base
-  TABLE_NAME = 'Opportunity_Contact__c'
+  TABLE_NAME = "Opportunity_Contact__c"
   # table_name: :foreign_key
   RELATIONSHIPS = { contact: "Contact__c", opportunity: "Opportunity__c" }
 end

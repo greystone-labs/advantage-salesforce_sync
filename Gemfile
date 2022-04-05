@@ -9,10 +9,10 @@ gem "rake", "~> 13.0"
 
 gem "rspec", "~> 3.0"
 
+gem "activesupport"
+gem "pry"
+gem "restforce", "~> 5.2.3"
 gem "rubocop", "~> 1.21"
-gem 'restforce', '~> 5.2.3'
-gem 'activesupport'
-gem 'pry'
 # gem 'guard'
-gem 'guard-rspec', require: false
-gem 'webmock'
+gem "guard-rspec", require: false
+gem "webmock"

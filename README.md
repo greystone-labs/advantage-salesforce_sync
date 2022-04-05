@@ -13,13 +13,14 @@ setup -> apps -> app manager
 enable oauth
 copy the oauth keys/secret
 
-* set up an access/security token for the user
-get security token
-https://glabs--stage.lightning.force.com/lightning/settings/personal/ResetApiToken/home
-
 * enable scope for user or set/allow ip restriptions
 allow user and ip restrictions 
 setup -> apps -> connected -> 'edit'
+
+### User Credential Setup
+* set up an access/security token for the user
+get security token
+https://glabs--stage.lightning.force.com/lightning/settings/personal/ResetApiToken/home
 
 
 ## Configure

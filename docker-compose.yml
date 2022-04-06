@@ -2,8 +2,6 @@ version: '3.7' # circleci only compatible up to 3.2
 services:
   salesforce-sync:
     build: .
-    ports:
-      - "6000:6000"
     environment:
       SALESFORCE_HOST: "${SALESFORCE_HOST}"
       SALESFORCE_USERNAME: "${SALESFORCE_USERNAME}"
@@ -12,6 +10,5 @@ services:
       SALESFORCE_CLIENT_ID: "${SALESFORCE_CLIENT_ID}"
       SALESFORCE_CLIENT_SECRET: "${SALESFORCE_CLIENT_SECRET}"
       SALESFORCE_API_VERSION: "${SALESFORCE_API_VERSION}"
-      PORT: 6000
     volumes:
       - .:/app

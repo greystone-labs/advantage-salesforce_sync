@@ -1,0 +1,14 @@
+version: '3.7' # circleci only compatible up to 3.2
+services:
+  salesforce-sync:
+    build: .
+    environment:
+      SALESFORCE_HOST: "${SALESFORCE_HOST}"
+      SALESFORCE_USERNAME: "${SALESFORCE_USERNAME}"
+      SALESFORCE_PASSWORD: "${SALESFORCE_PASSWORD}"
+      SALESFORCE_SECURITY_TOKEN: "${SALESFORCE_SECURITY_TOKEN}"
+      SALESFORCE_CLIENT_ID: "${SALESFORCE_CLIENT_ID}"
+      SALESFORCE_CLIENT_SECRET: "${SALESFORCE_CLIENT_SECRET}"
+      SALESFORCE_API_VERSION: "${SALESFORCE_API_VERSION}"
+    volumes:
+      - .:/app

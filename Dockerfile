@@ -13,5 +13,3 @@ WORKDIR /app
 ADD . /app
 
 RUN apk add alpine-sdk && gem install bundler && bundle install -j4
-
-CMD ["/app/bin/console"]

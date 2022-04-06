@@ -6,6 +6,7 @@ require_relative "salesforce_sync/base"
 require "restforce"
 require "active_support/all"
 
+require_relative "salesforce_sync/contact"
 require_relative "salesforce_sync/opportunity_contact"
 require_relative "salesforce_sync/property"
 require_relative "salesforce_sync/opportunity_property"

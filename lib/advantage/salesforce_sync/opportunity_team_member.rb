@@ -19,6 +19,13 @@ class OpportunityTeamMember < Advantage::SalesforceSync::Base
       foreign_key: :user_id
     }
   }
+
+  def user
+    return @user if @user
+    users = get_relationships[:user]
+    raise Error, "More than one users returned" if users.count > 1
+    @user = users.first
+  end
 end
 
 __END__

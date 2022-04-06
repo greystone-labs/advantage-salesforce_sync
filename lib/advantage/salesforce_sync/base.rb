@@ -37,6 +37,8 @@ module Advantage
         end
 
         def find(id)
+          return nil unless id
+
           klass = new
           rec = klass.client.find(table_name, id)
           fields = const_get(:MAPPINGS).values
@@ -93,6 +95,8 @@ module Advantage
       end
 
       def get_relationships
+        return nil unless id
+
         self.class.const_get(:RELATIONSHIPS).each_with_object({}) do |(key, rel), hash|
           if rel[:through]
             hash[key] = get_through_relationships(rel)
@@ -102,14 +106,12 @@ module Advantage
         end
       end
 
-      def get_has_one_relationship(rel)
-        rel[:class].find(attributes[rel[:foreign_key]])
-      end
-
-      def get_through_relationships(rel)
-        through_resources = rel[:through].where(foreign_key: rel[:through_key], foreign_key_id: id)
-        through_resources.map do |resource|
-          rel[:class].find(resource.attributes[rel[:foreign_key]])
+      def get_relationship(attribute)
+        rel = self.class.const_get(:RELATIONSHIPS)[attribute]
+        if rel[:through]
+          get_through_relationships(rel)
+        else
+          get_has_one_relationship(rel)
         end
       end
 
@@ -131,6 +133,18 @@ module Advantage
           hsh[k] = mappings[k].each_with_object({}) do |(kk, vv), nhsh|
             nhsh[vv] = relationship[k][kk]
           end
+        end
+      end
+
+      private
+      def get_has_one_relationship(rel)
+        rel[:class].find(attributes[rel[:foreign_key]])
+      end
+
+      def get_through_relationships(rel)
+        through_resources = rel[:through].where(foreign_key: rel[:through_key], foreign_key_id: id)
+        through_resources.map do |resource|
+          rel[:class].find(resource.attributes[rel[:foreign_key]])
         end
       end
     end

@@ -11,10 +11,10 @@ RSpec.describe Advantage::SalesforceSync::Base do
       { "name" => "Name" }
     ]
   end
+
   before do
     stub_const("TABLE_NAME", "Opportunity_Contact__c")
-    stub_const("MAPPINGS", { user: { "Id" => :id } })
-    stub_const("RELATIONSHIPS", { contact: "Contact__c", opportunity: "Opportunity__c" })
+    stub_const("MAPPINGS", { opportunity_id: "Opportunity__c", contact_id: 'Contact__c' })
     allow(client).to receive("connection")
   end
 
@@ -22,13 +22,30 @@ RSpec.describe Advantage::SalesforceSync::Base do
     expect(base).not_to be nil
   end
 
-  it "converts splat(*) to values" do
-    allow(client.connection).to receive("describe").and_return({ "fields" => fields })
-    expect(described_class.splat).to eq("Id, Name")
+  describe 'splat' do
+    it "converts splat(*) to values" do
+      allow(client.connection).to receive("describe").and_return({ "fields" => fields })
+      expect(described_class.splat).to eq("Id, Name")
+    end
   end
 
   it "transforms relationship struct to mapped" do
     mapped = { user: { id: "00579000000quzoAAA" } }
     expect(base.transform(relation)).to eq mapped
   end
+
+  describe 'get_relationships' do
+    let(:relationships) {{ contact: { class: Contact, foreign_key: :contact_id } }}
+    before do
+      stub_const("RELATIONSHIPS", relationships)
+    end
+    describe 'through relationship' do
+      it 'calls find method on correct Class', focus: true do
+        binding.pry
+        expect(Contact).to receive(:find).once.and_call_original
+        base.get_relationships
+      end
+    end
+  end
+
 end

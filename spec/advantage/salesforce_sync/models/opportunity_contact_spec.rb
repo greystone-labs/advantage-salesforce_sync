@@ -1,4 +1,5 @@
-RSpec.describe OpportunityContact do
+
+RSpec.describe Advantage::SalesforceSync::Models::OpportunityContact do
   let(:sf_id) { "a0a79000000fUlHAAU" }
   let(:opportunity_id) { "00679000005i9CAAAY" }
   let(:contact_id) { "00379000006ke5vAAA" }
@@ -20,12 +21,12 @@ RSpec.describe OpportunityContact do
     end
 
     it "calls find on Contact class" do
-      expect(Contact).to receive(:find).once.and_call_original
+      expect(Advantage::SalesforceSync::Models::Contact).to receive(:find).once.and_call_original
       opportunity_contact.contact
     end
 
     it "returns instance of Contact class" do
-      expect(opportunity_contact.contact).to be_a Contact
+      expect(opportunity_contact.contact).to be_a Advantage::SalesforceSync::Models::Contact
     end
 
     it "returns Contact with correct attributes" do

@@ -27,7 +27,8 @@ RSpec.describe OpportunityContact do
     it 'returns instance of Contact class' do
        expect(opportunity_contact.contact).to be_a Contact
     end
-    it 'returns Property with correct attributes' do
+
+    it 'returns Contact with correct attributes' do
       expect(opportunity_contact.contact.attributes).to include(contact_attrs)
     end
   end

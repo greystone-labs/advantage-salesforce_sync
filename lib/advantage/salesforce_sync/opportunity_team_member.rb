@@ -22,9 +22,8 @@ class OpportunityTeamMember < Advantage::SalesforceSync::Base
 
   def user
     return @user if @user
-    users = get_relationships[:user]
-    raise Error, "More than one users returned" if users.count > 1
-    @user = users.first
+
+    @user = get_relationships[:user]
   end
 end
 

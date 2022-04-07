@@ -12,21 +12,21 @@ class Opportunity < Advantage::SalesforceSync::Base
     property: {
       class: Property,
       through: OpportunityProperty,
-      through_key: 'Opportunity__c',
+      through_key: "Opportunity__c",
       foreign_key: :property_id
     }
   }
 
   MAPPINGS = {
-    id: 'Id',
-    name: 'Name',
-    description: 'Description',
-    closing_date: 'Closing_Date__c',
-    closed_date: 'CloseDate',
-    stage: 'StageName',
-    status: 'Status__c',
-    loan_type: 'Loan_Type__c',
-    start_date: 'Kick_Off_Date__c',
+    id: "Id",
+    name: "Name",
+    description: "Description",
+    closing_date: "Closing_Date__c",
+    closed_date: "CloseDate",
+    stage: "StageName",
+    status: "Status__c",
+    loan_type: "Loan_Type__c",
+    start_date: "Kick_Off_Date__c"
   }
 
   def property
@@ -34,6 +34,7 @@ class Opportunity < Advantage::SalesforceSync::Base
 
     properties = get_relationships[:property]
     raise Error, "More than one property returned" if properties.count > 1
+
     @property = properties.first
   end
 end

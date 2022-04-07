@@ -4,7 +4,7 @@ class OpportunityTeamMember < Advantage::SalesforceSync::Base
   TABLE_NAME = "opportunityteammember"
 
   MAPPINGS = {
-    id: 'Id',
+    id: "Id",
     opportunity_id: "OpportunityId",
     user_id: "UserId"
   }

@@ -15,7 +15,7 @@ RSpec.describe Advantage::SalesforceSync::Base do
 
   before do
     stub_const("TABLE_NAME", "Opportunity_Contact__c")
-    stub_const("MAPPINGS", { opportunity_id: "Opportunity__c", contact_id: 'Contact__c' })
+    stub_const("MAPPINGS", { opportunity_id: "Opportunity__c", contact_id: "Contact__c" })
     allow(client).to receive("connection")
   end
 
@@ -23,7 +23,7 @@ RSpec.describe Advantage::SalesforceSync::Base do
     expect(base).not_to be nil
   end
 
-  describe 'splat' do
+  describe "splat" do
     it "converts splat(*) to values" do
       allow(client.connection).to receive("describe").and_return({ "fields" => fields })
       expect(described_class.splat).to eq("Id, Name")
@@ -35,8 +35,8 @@ RSpec.describe Advantage::SalesforceSync::Base do
     expect(base.transform(relation)).to eq mapped
   end
 
-  describe 'get_relationships' do
-    context 'when id is nil' do
+  describe "get_relationships" do
+    context "when id is nil" do
       it { expect(base.get_relationships).to be_nil }
     end
   end

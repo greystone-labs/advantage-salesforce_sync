@@ -4,33 +4,34 @@ RSpec.describe Opportunity do
   let(:relationships) { Opportunity::RELATIONSHIPS }
   let(:property_attrs) do
     {
-      :city => "Alsip",
-      :id => "a0Z79000000IO6rEAG",
-      :latitude => nil,
-      :longitude => nil,
-      :name => "name",
-      :property_type => "Multifamily",
-      :state => "Illinois",
-      :street_address => "123 street",
-      :zip_code => "63021"
+      city: "Alsip",
+      id: "a0Z79000000IO6rEAG",
+      latitude: nil,
+      longitude: nil,
+      name: "name",
+      property_type: "Multifamily",
+      state: "Illinois",
+      street_address: "123 street",
+      zip_code: "63021"
     }
   end
 
-  describe '#property' do
-    it 'calls find on Property class' do
+  describe "#property" do
+    it "calls find on Property class" do
       expect(Property).to receive(:find).once.and_call_original
       opportunity.property
     end
 
-    it 'calls where on OpportunityProperty' do
-      expect(OpportunityProperty).to receive(:where).once.with(foreign_key: relationships[:property][:through_key], foreign_key_id: sf_id).and_call_original
+    it "calls where on OpportunityProperty" do
+      expect(OpportunityProperty).to receive(:where).once.with(foreign_key: relationships[:property][:through_key],
+                                                               foreign_key_id: sf_id).and_call_original
       opportunity.property
     end
 
-    it 'returns instance of Property class' do
-       expect(opportunity.property).to be_a Property
+    it "returns instance of Property class" do
+      expect(opportunity.property).to be_a Property
     end
-    it 'returns Property with correct attributes' do
+    it "returns Property with correct attributes" do
       expect(opportunity.property.attributes).to include(property_attrs)
     end
   end

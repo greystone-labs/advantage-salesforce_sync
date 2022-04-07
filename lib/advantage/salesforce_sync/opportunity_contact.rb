@@ -7,10 +7,10 @@ class OpportunityContact < Advantage::SalesforceSync::Base
   MAPPINGS = {
     id: "Id",
     opportunity_id: "Opportunity__c",
-    contact_id: 'Contact__c'
+    contact_id: "Contact__c"
   }
 
-  RELATIONSHIPS = { contact: { class: Contact, foreign_key: :contact_id} }
+  RELATIONSHIPS = { contact: { class: Contact, foreign_key: :contact_id } }
 
   def contact
     return @contact if @contact

@@ -6,8 +6,8 @@ class OpportunityProperty < Advantage::SalesforceSync::Base
   TABLE_NAME = "Opportunity_Property__c"
   MAPPINGS =
     {
-      id: 'Id',
-      opportunity_id: 'Opportunity__c',
-      property_id: 'Property__c'
+      id: "Id",
+      opportunity_id: "Opportunity__c",
+      property_id: "Property__c"
     }.freeze
 end

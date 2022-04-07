@@ -6,7 +6,7 @@ class Contact < Advantage::SalesforceSync::Base
   TABLE_NAME = "Contact"
   MAPPINGS =
     {
-      id: 'Id',
+      id: "Id",
       email: "Email",
       first_name: "FirstName",
       last_name: "LastName",

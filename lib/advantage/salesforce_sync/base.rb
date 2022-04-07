@@ -16,7 +16,7 @@ module Advantage
       end
 
       def attributes
-        self.class.const_get(:MAPPINGS).each_with_object({}) do |(key, value), hash|
+        self.class.const_get(:MAPPINGS).each_with_object({}) do |(key, _value), hash|
           hash[key] = instance_variable_get("@#{key}")
         end
       end
@@ -98,11 +98,11 @@ module Advantage
         return nil unless id
 
         self.class.const_get(:RELATIONSHIPS).each_with_object({}) do |(key, rel), hash|
-          if rel[:through]
-            hash[key] = get_through_relationships(rel)
-          else
-            hash[key] = get_has_one_relationship(rel)
-          end
+          hash[key] = if rel[:through]
+                        get_through_relationships(rel)
+                      else
+                        get_has_one_relationship(rel)
+                      end
         end
       end
 
@@ -119,6 +119,7 @@ module Advantage
       end
 
       private
+
       def get_has_one_relationship(rel)
         rel[:class].find(attributes[rel[:foreign_key]])
       end

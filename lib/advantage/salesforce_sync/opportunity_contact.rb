@@ -5,6 +5,7 @@ class OpportunityContact < Advantage::SalesforceSync::Base
   attr_accessor :opportunity_id, :contact_id
 
   MAPPINGS = {
+    id: "Id",
     opportunity_id: "Opportunity__c",
     contact_id: 'Contact__c'
   }
@@ -14,7 +15,6 @@ class OpportunityContact < Advantage::SalesforceSync::Base
   def contact
     return @contact if @contact
 
-    binding.pry
     @contact = get_relationships[:contact]
   end
 end

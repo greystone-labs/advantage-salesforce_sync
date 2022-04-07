@@ -106,24 +106,6 @@ module Advantage
         end
       end
 
-      def get_relationship(attribute)
-        rel = self.class.const_get(:RELATIONSHIPS)[attribute]
-        if rel[:through]
-          get_through_relationships(rel)
-        else
-          get_has_one_relationship(rel)
-        end
-      end
-
-      def relationships(id)
-        result = find(id)
-        rels = self.class.const_get(:RELATIONSHIPS)
-        # TODO: pass an object for the relationships and grab self.class.const_get(:TABLE_NAME)
-        rels.each_with_object({}) do |(k, v), hsh|
-          hsh[k] = client.find(k.to_s.capitalize, result[v]).attrs
-        end
-      end
-
       # TODO: pass some mapping that cleans the data object.. i.e. 'Id' => :id
       def transform(relationship)
         mappings = MAPPINGS

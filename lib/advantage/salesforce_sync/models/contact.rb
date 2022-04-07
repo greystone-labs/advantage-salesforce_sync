@@ -2,7 +2,6 @@
 module Advantage
   module SalesforceSync
     class Models
-
       class Contact < Advantage::SalesforceSync::Base
         attr_accessor :email, :first_name, :last_name, :phone_number
 

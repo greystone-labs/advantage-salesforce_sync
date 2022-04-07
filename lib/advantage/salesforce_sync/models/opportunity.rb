@@ -1,8 +1,4 @@
 # frozen_string_literal: true
-
-require "pry"
-# require_relative "opportunity_property"
-# require_relative "property"
 module Advantage
   module SalesforceSync
     class Models

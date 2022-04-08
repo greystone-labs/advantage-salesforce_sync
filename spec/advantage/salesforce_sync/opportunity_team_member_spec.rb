@@ -15,10 +15,33 @@ RSpec.describe OpportunityTeamMember do
     }
   end
 
+  let(:so_user) do
+    Restforce::SObject.new({
+      "Id" => "0051N00000602RtQAI",
+      "Email" => "field.springer@greyco.com.invalid",
+      "FirstName" =>  "Field",
+      "LastName" => "Springer",
+      "Phone" => "(540) 359-7054"
+    })
+  end
+
+  let(:so_opportunity) do
+    {}
+  end
+
   describe "#user" do
     before do
       opportunity_team_member.instance_variable_set("@opportunity_id", opportunity_id)
       opportunity_team_member.instance_variable_set("@user_id", user_id)
+
+
+      allow_any_instance_of(Restforce::Client).to receive(:find)
+        .with(relationships[:opportunity][:class]::TABLE_NAME, opportunity_team_member.opportunity_id)
+        .and_return(Restforce::SObject.new({}))
+
+      allow_any_instance_of(Restforce::Client).to receive(:find)
+        .with(relationships[:user][:class]::TABLE_NAME, opportunity_team_member.user_id)
+        .and_return(so_user)
     end
 
     it "calls find on User class" do

@@ -16,7 +16,37 @@ RSpec.describe Opportunity do
     }
   end
 
+  let(:so_op_property) do
+    Restforce::SObject.new({
+      "Opportunity__c" => "00679000005i9CAAAY",
+      "Property__c" => "a0Z79000000IO6rEAG"
+    })
+  end
+
+  let(:so_property) do
+    Restforce::SObject.new({
+      "Id" => "a0Z79000000IO6rEAG",
+      "Name" => "name",
+      "Zip_Code__c" => "63021",
+      "City__c" => "Alsip",
+      "Street__c" => "123 street",
+      "Property_Type__c" => "Multifamily",
+      "Longitude__c" => nil,
+      "Latitude__c" => nil,
+      "State__c" => "Illinois"
+    })
+  end
+
   describe "#property" do
+    before do
+      allow_any_instance_of(Restforce::Client).to receive(:describe).and_return({"fields" => {}})
+      allow_any_instance_of(Restforce::Client).to receive(:query_all).and_return([so_op_property])
+
+      allow_any_instance_of(Restforce::Client).to receive(:find)
+        .with(relationships[:property][:class]::TABLE_NAME, so_op_property.attrs["Property__c"])
+        .and_return(so_property)
+    end
+
     it "calls find on Property class" do
       expect(Property).to receive(:find).once.and_call_original
       opportunity.property

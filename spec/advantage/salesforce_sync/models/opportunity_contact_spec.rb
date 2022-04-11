@@ -1,9 +1,12 @@
 
 RSpec.describe Advantage::SalesforceSync::Models::OpportunityContact do
+  include_context 'authentication'
+
   let(:sf_id) { "a0a79000000fUlHAAU" }
   let(:opportunity_id) { "00679000005i9CAAAY" }
   let(:contact_id) { "00379000006ke5vAAA" }
   let(:opportunity_contact) { described_class.new(id: sf_id) }
+  let(:relationships) { Advantage::SalesforceSync::Models::OpportunityContact::RELATIONSHIPS }
   let(:contact_attrs) do
     {
       id: "00379000006ke5vAAA",
@@ -25,16 +28,17 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityContact do
 
   describe "#contact" do
     before do
+      authenticate!
       opportunity_contact.instance_variable_set("@opportunity_id", opportunity_id)
       opportunity_contact.instance_variable_set("@contact_id", contact_id)
 
       allow_any_instance_of(Restforce::Client).to receive(:find)
-        .with(Contact::TABLE_NAME, opportunity_contact.contact_id)
+        .with(relationships[:contact][:class]::TABLE_NAME, opportunity_contact.contact_id)
         .and_return(s_object)
     end
 
     it "calls find on Contact class" do
-      expect(Advantage::SalesforceSync::Models::Contact).to receive(:find).once.and_call_original
+      expect(relationships[:contact][:class]).to receive(:find).once.and_call_original
       opportunity_contact.contact
     end
 

@@ -1,4 +1,6 @@
 RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
+  include_context 'authentication'
+
   let(:sf_id) { "00q79000000KapBAAS" }
   let(:opportunity_id) { "00679000005i5igAAA" }
   let(:user_id) { "0051N00000602RtQAI" }
@@ -31,6 +33,7 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
 
   describe "#user" do
     before do
+      authenticate!
       opportunity_team_member.instance_variable_set("@opportunity_id", opportunity_id)
       opportunity_team_member.instance_variable_set("@user_id", user_id)
 

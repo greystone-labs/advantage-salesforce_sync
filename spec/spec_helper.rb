@@ -2,17 +2,12 @@
 
 require "advantage/salesforce_sync"
 require "webmock/rspec"
+require_relative "context/authenticate"
 
 WebMock.disable_net_connect!
 # WebMock.allow_net_connect!
 
 RSpec.configure do |config|
-
-  # Mock Restforce::Client.authenticate! for testing
-  config.before do
-    allow_any_instance_of(Restforce::Client).to receive(:authenticate!).and_return(true)
-  end
-
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
 

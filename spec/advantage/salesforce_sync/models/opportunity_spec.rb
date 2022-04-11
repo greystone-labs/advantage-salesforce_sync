@@ -1,4 +1,6 @@
 RSpec.describe Advantage::SalesforceSync::Models::Opportunity do
+  include_context 'authentication'
+
   let(:sf_id) { "00679000005i9CAAAY" }
   let(:opportunity) { described_class.new(id: sf_id) }
   let(:relationships) { Advantage::SalesforceSync::Models::Opportunity::RELATIONSHIPS }
@@ -39,6 +41,7 @@ RSpec.describe Advantage::SalesforceSync::Models::Opportunity do
 
   describe "#property" do
     before do
+      authenticate!
       allow_any_instance_of(Restforce::Client).to receive(:describe).and_return({"fields" => {}})
       allow_any_instance_of(Restforce::Client).to receive(:query_all).and_return([so_op_property])
 

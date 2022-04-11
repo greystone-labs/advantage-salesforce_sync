@@ -1,6 +1,5 @@
-
 RSpec.describe Advantage::SalesforceSync::Models::OpportunityContact do
-  include_context 'authentication'
+  include_context "authentication"
 
   let(:sf_id) { "a0a79000000fUlHAAU" }
   let(:opportunity_id) { "00679000005i9CAAAY" }
@@ -18,12 +17,12 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityContact do
   end
   let(:s_object) do
     Restforce::SObject.new({
-      "Id" => "00379000006ke5vAAA",
-      "Email" => "brendan.dunbar@cushwake.com",
-      "FirstName" => "Brendan",
-      "LastName" => "Dunbar",
-      "Phone" =>nil
-    })
+                             "Id" => "00379000006ke5vAAA",
+                             "Email" => "brendan.dunbar@cushwake.com",
+                             "FirstName" => "Brendan",
+                             "LastName" => "Dunbar",
+                             "Phone" => nil
+                           })
   end
 
   describe "#contact" do

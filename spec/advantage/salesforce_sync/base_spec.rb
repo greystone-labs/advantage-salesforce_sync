@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Advantage::SalesforceSync::Base do
-  include_context 'authentication'
+  include_context "authentication"
 
   # let(:client)  { Advantage::SalesforceSync::Client.new }
   let(:client) { instance_double("Advantage::SalesforceSync::Client") }

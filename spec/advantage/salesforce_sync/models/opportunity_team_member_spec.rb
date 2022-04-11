@@ -1,5 +1,5 @@
 RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
-  include_context 'authentication'
+  include_context "authentication"
 
   let(:sf_id) { "00q79000000KapBAAS" }
   let(:opportunity_id) { "00679000005i5igAAA" }
@@ -19,12 +19,12 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
 
   let(:so_user) do
     Restforce::SObject.new({
-      "Id" => "0051N00000602RtQAI",
-      "Email" => "field.springer@greyco.com.invalid",
-      "FirstName" =>  "Field",
-      "LastName" => "Springer",
-      "Phone" => "(540) 359-7054"
-    })
+                             "Id" => "0051N00000602RtQAI",
+                             "Email" => "field.springer@greyco.com.invalid",
+                             "FirstName" => "Field",
+                             "LastName" => "Springer",
+                             "Phone" => "(540) 359-7054"
+                           })
   end
 
   let(:so_opportunity) do
@@ -36,7 +36,6 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
       authenticate!
       opportunity_team_member.instance_variable_set("@opportunity_id", opportunity_id)
       opportunity_team_member.instance_variable_set("@user_id", user_id)
-
 
       allow_any_instance_of(Restforce::Client).to receive(:find)
         .with(relationships[:opportunity][:class]::TABLE_NAME, opportunity_team_member.opportunity_id)

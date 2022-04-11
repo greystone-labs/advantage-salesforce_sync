@@ -1,10 +1,10 @@
-RSpec.describe OpportunityTeamMember do
+RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
   let(:sf_id) { "00q79000000KapBAAS" }
   let(:opportunity_id) { "00679000005i5igAAA" }
   let(:user_id) { "0051N00000602RtQAI" }
 
   let(:opportunity_team_member) { described_class.new(id: sf_id) }
-  let(:relationships) { OpportunityTeamMember::RELATIONSHIPS }
+  let(:relationships) { Advantage::SalesforceSync::Models::OpportunityTeamMember::RELATIONSHIPS }
   let(:user_attrs) do
     {
       email: "field.springer@greyco.com.invalid",
@@ -45,12 +45,12 @@ RSpec.describe OpportunityTeamMember do
     end
 
     it "calls find on User class" do
-      expect(User).to receive(:find).once.and_call_original
+      expect(Advantage::SalesforceSync::Models::User).to receive(:find).once.and_call_original
       opportunity_team_member.user
     end
 
     it "returns instance of User class" do
-      expect(opportunity_team_member.user).to be_a User
+      expect(opportunity_team_member.user).to be_a Advantage::SalesforceSync::Models::User
     end
 
     it "returns User with correct attributes" do

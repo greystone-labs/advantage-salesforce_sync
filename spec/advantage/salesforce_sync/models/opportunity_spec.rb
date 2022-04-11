@@ -1,7 +1,7 @@
-RSpec.describe Opportunity do
+RSpec.describe Advantage::SalesforceSync::Models::Opportunity do
   let(:sf_id) { "00679000005i9CAAAY" }
   let(:opportunity) { described_class.new(id: sf_id) }
-  let(:relationships) { Opportunity::RELATIONSHIPS }
+  let(:relationships) { Advantage::SalesforceSync::Models::Opportunity::RELATIONSHIPS }
   let(:property_attrs) do
     {
       city: "Alsip",
@@ -48,18 +48,18 @@ RSpec.describe Opportunity do
     end
 
     it "calls find on Property class" do
-      expect(Property).to receive(:find).once.and_call_original
+      expect(Advantage::SalesforceSync::Models::Property).to receive(:find).once.and_call_original
       opportunity.property
     end
 
     it "calls where on OpportunityProperty" do
-      expect(OpportunityProperty).to receive(:where).once.with(foreign_key: relationships[:property][:through_key],
+      expect(Advantage::SalesforceSync::Models::OpportunityProperty).to receive(:where).once.with(foreign_key: relationships[:property][:through_key],
                                                                foreign_key_id: sf_id).and_call_original
       opportunity.property
     end
 
     it "returns instance of Property class" do
-      expect(opportunity.property).to be_a Property
+      expect(opportunity.property).to be_a Advantage::SalesforceSync::Models::Property
     end
     it "returns Property with correct attributes" do
       expect(opportunity.property.attributes).to include(property_attrs)

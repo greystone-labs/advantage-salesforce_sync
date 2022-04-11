@@ -6,13 +6,13 @@ require_relative "salesforce_sync/base"
 require "restforce"
 require "active_support/all"
 
-require_relative "salesforce_sync/contact"
-require_relative "salesforce_sync/opportunity_contact"
-require_relative "salesforce_sync/property"
-require_relative "salesforce_sync/opportunity_property"
-require_relative "salesforce_sync/opportunity"
-require_relative "salesforce_sync/user"
-require_relative "salesforce_sync/opportunity_team_member"
+require_relative "salesforce_sync/models/contact"
+require_relative "salesforce_sync/models/opportunity_contact"
+require_relative "salesforce_sync/models/property"
+require_relative "salesforce_sync/models/opportunity_property"
+require_relative "salesforce_sync/models/opportunity"
+require_relative "salesforce_sync/models/user"
+require_relative "salesforce_sync/models/opportunity_team_member"
 
 module Advantage
   module SalesforceSync

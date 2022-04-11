@@ -14,19 +14,6 @@ RSpec.describe Advantage::SalesforceSync::Base do
     ]
   end
 
-  # let(:expected_body) do
-  #   {
-  #     subject: email_subject,
-  #     personalizations: [
-  #       {
-  #         to: [{ email: to_email }],
-  #         dynamic_template_data: dynamic_template_data
-  #       }
-  #     ],
-  #     template_id: template_id
-  #   }
-  # end
-
   before do
     stub_const("TABLE_NAME", table_name)
     stub_const("MAPPINGS", { opportunity_id: "Opportunity__c", contact_id: "Contact__c" })

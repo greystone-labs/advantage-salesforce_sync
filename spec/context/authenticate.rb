@@ -18,7 +18,7 @@ RSpec.shared_context "authentication" do
   let(:client_double) { double(Advantage::SalesforceSync::Client) }
 
   def authenticate!
-    stub_const('Advantage::SalesforceSync::Client', client_double)
+    stub_const("Advantage::SalesforceSync::Client", client_double)
     allow(client_double).to receive(:new).and_return(DoubleClient.new)
     allow(client_double).to receive(:connection).and_return(Restforce::Data::Client.new)
   end

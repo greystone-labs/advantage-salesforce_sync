@@ -10,7 +10,8 @@ module Advantage
         MAPPINGS = {
           id: "Id",
           opportunity_id: "Opportunity__c",
-          contact_id: "Contact__c"
+          contact_id: "Contact__c",
+          role: 'Role__c'
         }
 
         RELATIONSHIPS = { contact: { class: Contact, foreign_key: :contact_id } }

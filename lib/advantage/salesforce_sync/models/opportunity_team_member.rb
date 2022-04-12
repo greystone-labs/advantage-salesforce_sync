@@ -11,7 +11,8 @@ module Advantage
         MAPPINGS = {
           id: "Id",
           opportunity_id: "OpportunityId",
-          user_id: "UserId"
+          user_id: "UserId",
+          role: 'TeamMemberRole'
         }
 
         RELATIONSHIPS = {

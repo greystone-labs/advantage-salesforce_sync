@@ -3,7 +3,6 @@
 module Advantage
   module SalesforceSync
     class Models
-
       class OpportunityContact < Advantage::SalesforceSync::Base
         TABLE_NAME = "Opportunity_Contact__c"
         attr_accessor :opportunity_id, :contact_id

@@ -42,6 +42,7 @@ module Advantage
           klass = new
           rec = klass.client.find(table_name, id)
           fields = const_get(:MAPPINGS).values
+
           # klass.attributes = rec.attrs.slice(*fields)
           attrs = rec.attrs.slice(*fields)
 

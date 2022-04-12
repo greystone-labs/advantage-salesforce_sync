@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Advantage::SalesforceSync::Base do
+  include_context "authentication"
+
   # let(:client)  { Advantage::SalesforceSync::Client.new }
   let(:client) { instance_double("Advantage::SalesforceSync::Client") }
   let(:base) { Advantage::SalesforceSync::Base.new(client: client, id: sf_id) }
+  let(:table_name) { "Opportunity_Contact__c" }
   let(:sf_id) { nil }
   let(:relation) { { user: { "Id" => "00579000000quzoAAA", "Username" => "john.someone@mailinator.com" } } }
   let(:fields) do
@@ -14,7 +17,8 @@ RSpec.describe Advantage::SalesforceSync::Base do
   end
 
   before do
-    stub_const("TABLE_NAME", "Opportunity_Contact__c")
+    authenticate!
+    stub_const("TABLE_NAME", table_name)
     stub_const("MAPPINGS", { opportunity_id: "Opportunity__c", contact_id: "Contact__c" })
     allow(client).to receive("connection")
   end
@@ -24,8 +28,12 @@ RSpec.describe Advantage::SalesforceSync::Base do
   end
 
   describe "splat" do
+    before do
+      allow_any_instance_of(Restforce::Client).to receive(:describe).with(table_name).and_return({ "fields" => fields })
+    end
+
     it "converts splat(*) to values" do
-      allow(client.connection).to receive("describe").and_return({ "fields" => fields })
+      # allow(client.connection).to receive("describe").and_return({ "fields" => fields })
       expect(described_class.splat).to eq("Id, Name")
     end
   end

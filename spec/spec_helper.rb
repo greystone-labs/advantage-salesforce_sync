@@ -2,9 +2,10 @@
 
 require "advantage/salesforce_sync"
 require "webmock/rspec"
+require_relative "context/authenticate"
 
-# WebMock.disable_net_connect!
-WebMock.allow_net_connect!
+WebMock.disable_net_connect!
+# WebMock.allow_net_connect!
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

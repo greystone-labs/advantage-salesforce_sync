@@ -3,7 +3,6 @@
 module Advantage
   module SalesforceSync
     class Models
-
       class OpportunityTeamMember < Advantage::SalesforceSync::Base
         attr_accessor :opportunity_id, :user_id
 

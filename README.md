@@ -13,18 +13,30 @@ setup -> apps -> app manager
 enable oauth
 copy the oauth keys/secret
 
-* enable scope for user or set/allow ip restriptions
-allow user and ip restrictions 
-setup -> apps -> connected -> 'edit'
 
 ### User Credential Setup
+* if using a service account
+
+https://glabs--stage.lightning.force.com/lightning/setup/ManageUsers/
+
+click 'login'
+
+* set password
+https://glabs--stage.lightning.force.com/lightning/settings/personal/ChangePassword/home
+
 * set up an access/security token for the user
 get security token
 https://glabs--stage.lightning.force.com/lightning/settings/personal/ResetApiToken/home
 
+**important** each time you change password security token gets changed.
+
+* enable scope for user or set/allow ip restriptions
+allow user and ip restrictions 
+setup -> apps -> connected -> 'edit'
+
 
 ## Configure
- some of the terminalogy is different between salesforce and oauthhttps://help.salesforce.com/s/articleView?id=sf.remoteaccess_terminology.htm&type=5
+ some of the terminalogy is different between salesforce and oauth https://help.salesforce.com/s/articleView?id=sf.remoteaccess_terminology.htm&type=5
 for instance client_id = consumer_key, consumer_secret = client_secret
 
 export SALESFORCE_HOST='test.salesforce.com' # or "login.salesforce.com"

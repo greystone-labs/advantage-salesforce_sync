@@ -4,7 +4,7 @@ module Advantage
   module SalesforceSync
     class Models
       class OpportunityTeamMember < Advantage::SalesforceSync::Base
-        attr_accessor :opportunity_id, :user_id
+        attr_accessor :opportunity_id, :user_id, :role
 
         TABLE_NAME = "opportunityteammember"
 
@@ -12,7 +12,7 @@ module Advantage
           id: "Id",
           opportunity_id: "OpportunityId",
           user_id: "UserId",
-          role: 'TeamMemberRole'
+          role: "TeamMemberRole"
         }
 
         RELATIONSHIPS = {

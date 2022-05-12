@@ -5,13 +5,13 @@ module Advantage
     class Models
       class OpportunityContact < Advantage::SalesforceSync::Base
         TABLE_NAME = "Opportunity_Contact__c"
-        attr_accessor :opportunity_id, :contact_id
+        attr_accessor :opportunity_id, :contact_id, :role
 
         MAPPINGS = {
           id: "Id",
           opportunity_id: "Opportunity__c",
           contact_id: "Contact__c",
-          role: 'Role__c'
+          role: "Role__c"
         }
 
         RELATIONSHIPS = { contact: { class: Contact, foreign_key: :contact_id } }

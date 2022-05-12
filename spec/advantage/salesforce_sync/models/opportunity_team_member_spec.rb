@@ -7,6 +7,17 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
 
   let(:opportunity_team_member) { described_class.new(id: sf_id) }
   let(:relationships) { Advantage::SalesforceSync::Models::OpportunityTeamMember::RELATIONSHIPS }
+  let(:role) { "Greystone - Project Manager" }
+
+  let(:opportunity_team_member_attrs) do
+    {
+      id: sf_id,
+      opportunity_id: opportunity_id,
+      user_id: user_id,
+      role: role
+    }
+  end
+
   let(:user_attrs) do
     {
       email: "field.springer@greyco.com.invalid",
@@ -15,6 +26,15 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
       last_name: "Springer",
       phone_number: "(540) 359-7054"
     }
+  end
+
+  let(:so_team_member) do
+    Restforce::SObject.new({
+                             "Id" => sf_id,
+                             "TeamMemberRole" => role,
+                             "UserId" => user_id,
+                             "OpportunityId" => opportunity_id
+                           })
   end
 
   let(:so_user) do
@@ -29,6 +49,25 @@ RSpec.describe Advantage::SalesforceSync::Models::OpportunityTeamMember do
 
   let(:so_opportunity) do
     {}
+  end
+
+  before do
+    authenticate!
+  end
+
+  describe "OpportunityTeamMember" do
+    let(:opportunity_team_member) { described_class.find(sf_id) }
+    before do
+      allow_any_instance_of(Restforce::Client).to receive(:find)
+        .with(described_class::TABLE_NAME, sf_id)
+        .and_return(so_team_member)
+    end
+
+    it "returns opportunity_team_member with correct attributes" do
+      expect(opportunity_team_member.attributes).to include(opportunity_team_member_attrs)
+    end
+
+    it { expect(opportunity_team_member.role).to eq(role) }
   end
 
   describe "#user" do

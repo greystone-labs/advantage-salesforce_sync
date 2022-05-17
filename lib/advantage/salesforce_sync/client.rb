@@ -7,7 +7,9 @@ module Advantage
 
       attr_accessor :client
 
-      def initialize
+      def connection
+        return @connection if @connection
+
         self.client = Restforce.new(host: ENV.fetch("SALESFORCE_HOST"))
 
         # Restforce.new :username => Rails.application.secrets.salesforce_username,
@@ -18,10 +20,7 @@ module Advantage
         #   :host           => Rails.application.secrets.salesforce_host,
         #   :debugging      => Rails.application.secrets.salesforce_debugging
         client.authenticate!
-      end
-
-      def connection
-        @connection ||= client
+        @connection = client
       end
     end
   end

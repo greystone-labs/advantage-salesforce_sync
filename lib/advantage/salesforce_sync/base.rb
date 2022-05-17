@@ -7,7 +7,7 @@ module Advantage
 
       def initialize(client: nil, id: nil)
         # @client = client.connection
-        @client = (client || Client.send(:new)).connection
+        @client = Client.instance.connection
         @id = id
       end
 

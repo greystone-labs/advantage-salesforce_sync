@@ -6,10 +6,6 @@ RSpec.shared_context "authentication" do
   class DoubleClient
     attr_accessor :client
 
-    def initialize
-      true
-    end
-
     def connection
       Restforce::Data::Client.new
     end
@@ -19,7 +15,7 @@ RSpec.shared_context "authentication" do
 
   def authenticate!
     stub_const("Advantage::SalesforceSync::Client", client_double)
-    allow(client_double).to receive(:new).and_return(DoubleClient.new)
+    allow(client_double).to receive(:instance).and_return(DoubleClient.new)
     allow(client_double).to receive(:connection).and_return(Restforce::Data::Client.new)
   end
 end

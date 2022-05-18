@@ -5,8 +5,7 @@ module Advantage
       # attr_accessor :attributes
       attr_reader :client, :table_name, :id
 
-      def initialize(client: nil, id: nil)
-        # @client = client.connection
+      def initialize(id: nil)
         @client = Client.instance.connection
         @id = id
       end

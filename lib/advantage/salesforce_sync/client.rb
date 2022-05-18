@@ -5,12 +5,10 @@ module Advantage
     class Client
       include Singleton
 
-      attr_accessor :client
-
       def connection
         return @connection if @connection
 
-        self.client = Restforce.new(host: ENV.fetch("SALESFORCE_HOST"))
+        client = Restforce.new(host: ENV.fetch("SALESFORCE_HOST"))
 
         # Restforce.new :username => Rails.application.secrets.salesforce_username,
         #   :password       => Rails.application.secrets.salesforce_password,

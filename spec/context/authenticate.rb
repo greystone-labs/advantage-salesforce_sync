@@ -4,8 +4,6 @@ RSpec.shared_context "authentication" do
   # Mock Restforce::Client.authenticate! for testing
 
   class DoubleClient
-    attr_accessor :client
-
     def connection
       Restforce::Data::Client.new
     end

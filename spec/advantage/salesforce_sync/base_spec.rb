@@ -3,9 +3,7 @@
 RSpec.describe Advantage::SalesforceSync::Base do
   include_context "authentication"
 
-  # let(:client)  { Advantage::SalesforceSync::Client.new }
-  let(:client) { instance_double("Advantage::SalesforceSync::Client") }
-  let(:base) { Advantage::SalesforceSync::Base.new(client: client, id: sf_id) }
+  let(:base) { Advantage::SalesforceSync::Base.new(id: sf_id) }
   let(:table_name) { "Opportunity_Contact__c" }
   let(:sf_id) { nil }
   let(:relation) { { user: { "Id" => "00579000000quzoAAA", "Username" => "john.someone@mailinator.com" } } }
@@ -20,7 +18,6 @@ RSpec.describe Advantage::SalesforceSync::Base do
     authenticate!
     stub_const("TABLE_NAME", table_name)
     stub_const("MAPPINGS", { opportunity_id: "Opportunity__c", contact_id: "Contact__c" })
-    allow(client).to receive("connection")
   end
 
   it "initializes" do

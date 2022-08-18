@@ -78,7 +78,7 @@ module Advantage
               klass.instance_variable_set("@#{key}", attrs[field])
             end
             klass
-          end
+          end || []
         end
 
         def splat

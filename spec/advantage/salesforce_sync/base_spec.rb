@@ -45,4 +45,14 @@ RSpec.describe Advantage::SalesforceSync::Base do
       it { expect(base.get_relationships).to be_nil }
     end
   end
+
+  describe "#where" do
+    context "when not found" do
+      before {
+        allow_any_instance_of(Restforce::Client).to receive(:query_all).and_return([])
+        allow_any_instance_of(Restforce::Client).to receive(:describe).and_return({'fields' => [{'name' => 'id'}]})
+      }
+      it { expect(described_class.where(foreign_key: 'not_a_key', foreign_key_id: 12321)).to be_empty }
+    end
+  end
 end

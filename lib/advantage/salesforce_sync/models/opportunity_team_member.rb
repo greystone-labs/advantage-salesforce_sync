@@ -13,7 +13,7 @@ module Advantage
           opportunity_id: "OpportunityId",
           user_id: "UserId",
           role: "TeamMemberRole"
-        }
+        }.freeze
 
         RELATIONSHIPS = {
           opportunity: {
@@ -24,7 +24,7 @@ module Advantage
             class: User,
             foreign_key: :user_id
           }
-        }
+        }.freeze
 
         def user
           return @user if @user

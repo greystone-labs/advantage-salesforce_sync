@@ -14,7 +14,7 @@ module Advantage
             through_key: "Opportunity__c",
             foreign_key: :property_id
           }
-        }
+        }.freeze
 
         MAPPINGS = {
           id: "Id",
@@ -26,15 +26,10 @@ module Advantage
           status: "Status__c",
           loan_type: "Loan_Type__c",
           start_date: "Kick_Off_Date__c"
-        }
+        }.freeze
 
-        def property
-          return @property if @property
-
-          properties = get_relationships[:property]
-          raise Error, "More than one property returned" if properties.count > 1
-
-          @property = properties.first
+        def properties
+          return @properties ||= get_relationships[:property]
         end
       end
     end

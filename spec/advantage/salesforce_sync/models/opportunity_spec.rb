@@ -61,11 +61,12 @@ RSpec.describe Advantage::SalesforceSync::Models::Opportunity do
       opportunity.properties
     end
 
-    it "returns instance of Property class" do
-      expect(opportunity.properties).to be_a Advantage::SalesforceSync::Models::Property
+    it "returns array of Property classes" do
+      expect(opportunity.properties.map(&:class)).to match_array([Advantage::SalesforceSync::Models::Property])
     end
+
     it "returns Property with correct attributes" do
-      expect(opportunity.property.attributes).to include(property_attrs)
+      expect(opportunity.properties.first.attributes).to include(property_attrs)
     end
   end
 end

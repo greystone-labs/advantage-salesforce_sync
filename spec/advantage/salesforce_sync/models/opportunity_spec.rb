@@ -39,7 +39,7 @@ RSpec.describe Advantage::SalesforceSync::Models::Opportunity do
                            })
   end
 
-  describe "#property" do
+  describe "#properties" do
     before do
       authenticate!
       allow_any_instance_of(Restforce::Client).to receive(:describe).and_return({ "fields" => {} })
@@ -52,20 +52,21 @@ RSpec.describe Advantage::SalesforceSync::Models::Opportunity do
 
     it "calls find on Property class" do
       expect(Advantage::SalesforceSync::Models::Property).to receive(:find).once.and_call_original
-      opportunity.property
+      opportunity.properties
     end
 
     it "calls where on OpportunityProperty" do
       expect(Advantage::SalesforceSync::Models::OpportunityProperty).to receive(:where).once.with(foreign_key: relationships[:property][:through_key],
                                                                                                   foreign_key_id: sf_id).and_call_original
-      opportunity.property
+      opportunity.properties
     end
 
-    it "returns instance of Property class" do
-      expect(opportunity.property).to be_a Advantage::SalesforceSync::Models::Property
+    it "returns array of Property classes" do
+      expect(opportunity.properties.map(&:class)).to match_array([Advantage::SalesforceSync::Models::Property])
     end
+
     it "returns Property with correct attributes" do
-      expect(opportunity.property.attributes).to include(property_attrs)
+      expect(opportunity.properties.first.attributes).to include(property_attrs)
     end
   end
 end

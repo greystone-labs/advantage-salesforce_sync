@@ -12,7 +12,7 @@ module Advantage
           opportunity_id: "Opportunity__c",
           contact_id: "Contact__c",
           role: "Role__c"
-        }
+        }.freeze
 
         RELATIONSHIPS = { contact: { class: Contact, foreign_key: :contact_id } }
 

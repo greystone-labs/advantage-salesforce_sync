@@ -4,7 +4,7 @@ module Advantage
   module SalesforceSync
     class Models
       class Property < Advantage::SalesforceSync::Base
-        attr_accessor :name, :zip_code, :city, :street_address, :property_type, :longitude, :latitude, :state
+        attr_accessor :id, :name, :zip_code, :city, :street_address, :property_type, :longitude, :latitude, :state
 
         TABLE_NAME = "Property__c"
 

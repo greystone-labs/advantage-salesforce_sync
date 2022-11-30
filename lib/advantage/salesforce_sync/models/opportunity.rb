@@ -4,7 +4,8 @@ module Advantage
   module SalesforceSync
     class Models
       class Opportunity < Advantage::SalesforceSync::Base
-        attr_accessor :id, :name, :description, :closing_date, :closed_date, :stage, :status, :loan_type, :start_date, :platform
+        attr_accessor :id, :name, :description, :closing_date, :closed_date, :stage, :status, :loan_type, :start_date,
+                      :platform
 
         TABLE_NAME = "Opportunity"
         RELATIONSHIPS = {
@@ -30,7 +31,7 @@ module Advantage
         }.freeze
 
         def properties
-          return @properties ||= get_relationships[:property]
+          @properties ||= get_relationships[:property]
         end
       end
     end

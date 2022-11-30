@@ -39,16 +39,28 @@ RSpec.describe Advantage::SalesforceSync::Models::Opportunity do
                            })
   end
 
+  before do
+    authenticate!
+  end
+
+  describe '#mapped' do 
+    before {
+      allow_any_instance_of(Restforce::Client).to receive(:find).and_return( Restforce::SObject.new({"Loan_Platform__c" => 'mocked'}))
+    }
+
+    subject { described_class.find(sf_id) }
+    it { expect(subject.platform).to eq('mocked') }
+  end
+
   describe "#properties" do
-    before do
-      authenticate!
-      allow_any_instance_of(Restforce::Client).to receive(:describe).and_return({ "fields" => {} })
+    before {
       allow_any_instance_of(Restforce::Client).to receive(:query_all).and_return([so_op_property])
+      allow_any_instance_of(Restforce::Client).to receive(:describe).and_return({ "fields" => {} })    
 
       allow_any_instance_of(Restforce::Client).to receive(:find)
-        .with(relationships[:property][:class]::TABLE_NAME, so_op_property.attrs["Property__c"])
-        .and_return(so_property)
-    end
+      .with(relationships[:property][:class]::TABLE_NAME, so_op_property.attrs["Property__c"])
+      .and_return(so_property)
+    }
 
     it "calls find on Property class" do
       expect(Advantage::SalesforceSync::Models::Property).to receive(:find).once.and_call_original

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    advantage-salesforce_sync (0.1.3)
+    advantage-salesforce_sync (0.1.5)
       activesupport
       rake (~> 13.0)
       restforce (~> 5.2.3)

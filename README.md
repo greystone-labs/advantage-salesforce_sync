@@ -64,8 +64,54 @@ Or install it yourself as:
     $ gem install advantage-salesforce_sync
 
 ## Usage
+Use with your own models outside of the gem
 
-TODO: Write usage instructions here
+```ruby
+module MyModule
+  class Custom < Advantage::SalesforceSync::Base
+    attr_accessor :id, :name, :custom_field
+
+    TABLE_NAME = "Custom_Table"
+    RELATIONSHIPS = {
+      property: {
+        class: Property,
+        through: CustomProperty,
+        through_key: "Opportunity__c",
+        foreign_key: :custom_id
+      }
+    }.freeze
+
+    MAPPINGS = {
+      id: "Id",
+      name: "Name",
+      description: "Description",
+      custom_field: "Customfield__c"
+    }.freeze
+end
+
+```
+
+
+Find records
+
+```ruby
+Advantage::SalesforceSync::Models::Opportunity.find(opportunity_id) # returns single record
+Advantage::SalesforceSync::Models::Opportunity.new.updated(from: (Time.now - 1.day), to: Time.now) # returns a map of id's updated in the last day
+
+```
+
+Find fields to map
+
+```ruby
+
+client = Restforce.new(host: ENV.fetch("SALESFORCE_HOST"))
+
+# -- OR --
+op = Advantage::SalesforceSync::Models::Opportunity.new
+
+fields = client.describe('Opportunity')['fields'].pluck("name")
+
+```
 
 ## Development
 
